@@ -1,10 +1,10 @@
 <?php
-include_once '../conexao.php';
+include_once '../core/conexao.php';
 
 class Video
 {
-    private $nome;
-    private $descricao;
+    protected $nome;
+    protected $descricao;
 
     /**
      * @return mixed
@@ -45,15 +45,19 @@ class Video
     public function save()
     {
         $pdo = conexao();
-        $stmt = $pdo->prepare('INSERT INTO filme (nome) VALUES(:nome)');
-        $stmt->execute(
-            [
-                ':nome' => $this->nome
-            ]
-        );
-
+        $stmt = $pdo->prepare('INSERT INTO video (nome, descricao) VALUES(:nome, :descricao)');
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':descricao', $this->descricao);
+        $stmt->execute();
+        // $stmt->execute(
+        //     [
+        //         ':nome' => $this->nome
+        //     ]
+        // );
+        // $alteredRows = $stmt->rowCount();
+        // echo $alteredRows > 0 ? "Vídeo '$this->nome' inserido" : "Falha ao inserir";
     }
 
 }
 
-$video = new Video();
+?>

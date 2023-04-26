@@ -4,9 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/index.css">
     <title>Hello World</title>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    
+<h3>Cadastrar Filme</h3>
+
+<div>
+  <form method="post" action="./controller/FilmeController.php?action=cadastrar">
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" name="nome">
+    
+    <label for="descricao">Descrição</label>
+    <textarea id="descricao" name="descricao"></textarea>
+   
+    <label for="diretor">Diretor</label>
+    <select id="diretor" name="diretor">
+      <option selected="true" disabled>Selecione...</option>
+      <option value="George Lucas">George Lucas</option>
+      <option value="Steven Spielberg">Steven Spielberg</option>
+      <option value="John Ford">John Ford</option>
+    </select>
+   
+    <label for="elenco">Elenco</label>
+    <textarea id="elenco" name="elenco"></textarea>
+
+    <input type="submit" value="Enviar">
+  </form>
+</div>
 </body>
 </html>

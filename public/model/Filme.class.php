@@ -1,6 +1,6 @@
 <?php
-include_once '../conexao.php';
-
+include "Video.class.php";
+include_once '../core/conexao.php';
 class Filme extends Video
 {
     private $diretor;
@@ -41,4 +41,23 @@ class Filme extends Video
         $this->elenco = $elenco;
         return $this;
     }
+
+
+    public function save()
+    {
+        $pdo = conexao();
+        $stmt = $pdo->prepare('INSERT INTO filme (nome, descricao, diretor, elenco) VALUES(:nome, :descricao, :diretor, :elenco)');
+        $stmt->execute(
+            [
+                ':nome' => $this->nome,
+                ':descricao' => $this->descricao,
+                ':diretor' => $this->diretor,
+                ':elenco' => $this->elenco
+            ]
+        );
+        // $alteredRows = $stmt->rowCount();
+        // echo $alteredRows > 0 ? "Vídeo '$this->nome' inserido" : "Falha ao inserir";
+    }
 }
+
+?>
