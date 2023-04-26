@@ -1,4 +1,5 @@
 <?php
+include_once '../conexao.php';
 
 class Video
 {
@@ -40,4 +41,19 @@ class Video
         $this->descricao = $descricao;
         return $this;
     }
+
+    public function save()
+    {
+        $pdo = conexao();
+        $stmt = $pdo->prepare('INSERT INTO filme (nome) VALUES(:nome)');
+        $stmt->execute(
+            [
+                ':nome' => $this->nome
+            ]
+        );
+
+    }
+
 }
+
+$video = new Video();
