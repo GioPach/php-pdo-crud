@@ -21,11 +21,6 @@ const validateNomePessoa = (nome) => {
 };
 const validateText = (text) => text.length >= 10 && text.length <= 100;
 
-const validateElenco = (text) => {
-  const nomesAtores = text.split(",").map((nome) => nome.trim());
-  return nomesAtores.length >= 2 && nomesAtores.every(validateNomePessoa);
-};
-
 /**
  * Object to map which validation method
  * will be used for each form entry
@@ -39,7 +34,7 @@ const rules = {
   nome: minTwoCharacters,
   descricao: validateText,
   diretor: validateNomePessoa,
-  elenco: validateElenco,
+  elenco: validateNomePessoa,
 };
 
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
@@ -99,15 +94,26 @@ function checkButtonEnabling() {
  */
 export function validateField() {
   checkButtonEnabling();
+
   let validation = false;
   if (rules[this.name](this.value)) validation = true;
   updateFieldState(this, validation);
-  formState[this.name] = validation;
-  console.clear();
-  console.log("validating field:", this.name, ", valid:", validation);
-  console.log(formState);
+
+  if (this.name !== "elenco") {
+    formState[this.name] = validation;
+  } else {
+  }
+
   checkButtonEnabling();
 }
+
+const getLabel = (field) => {
+  if (field.classList.contains("iconed")) {
+    return field.parentElement.parentElement.querySelector("label");
+  }
+
+  return field.parentElement.querySelector("label");
+};
 
 /**
  * Used to trigger the validation classes tuned by
@@ -115,7 +121,7 @@ export function validateField() {
  * @param {HTMLElement} field input or textarea
  */
 const updateFieldState = (field, isValid) => {
-  const fieldLabel = field.parentElement.querySelector("label");
+  const fieldLabel = getLabel(field);
   if (isValid) {
     field.setAttribute("isvalid", true);
     fieldLabel.setAttribute("isvalid", true);

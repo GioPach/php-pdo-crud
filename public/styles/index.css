@@ -14,7 +14,9 @@ main {
   background: url("../assets/netflix-fundo.svg") no-repeat center;
   background-size: cover;
   background-attachment: fixed;
+  padding: 2rem;
 }
+
 
 h1 {
   color: #d61c1c;
@@ -91,7 +93,7 @@ textarea:focus {
   outline: none;
 }
 
-section.form-container {
+section.form-section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,12 +107,12 @@ section.form-container {
 
 textarea[isvalid=false],
 input[isvalid=false] {
-  border-color: #FF0000;
+  border: 1.5px solid #FF0000;
 }
 
 textarea[isvalid=true],
 input[isvalid=true] {
-  border-color: #4CAF50;
+  border: 1px solid #4CAF50;
 }
 
 label[isvalid=false] {
@@ -119,4 +121,33 @@ label[isvalid=false] {
 
 label[isvalid=true] {
   color: #4CAF50;
+}
+
+div.ref-btn {
+  position: relative;
+}
+
+.btn-ator {
+  position: absolute;
+  top: 50%;
+  right: 4%;
+  transform: translate(-4%, -50%);
+  cursor: pointer;
+  padding: 2px 6px;
+  color: #333;
+  background-color: #eeeeee;
+  border: 0;
+}
+
+ul#elenco-list {
+  list-style: none;
+  background-color: #fff;
+  color: #222;
+  margin-top: 8px;
+}
+
+ul#elenco-list li {
+  position: relative;
+  padding: 5px;
+  border-bottom: 1px solid #222;
 }

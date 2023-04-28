@@ -1,4 +1,5 @@
 import { validateField, validateForm } from "./formValidation.js";
+import { addAtor } from "./elenco.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   configForm();
@@ -19,4 +20,8 @@ function configForm() {
   fields.forEach((field) => {
     field.addEventListener("input", validateField);
   });
+
+  document
+    .querySelector(".add-ator")
+    .addEventListener("click", (e) => addAtor(e));
 }

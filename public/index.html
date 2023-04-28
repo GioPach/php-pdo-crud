@@ -22,7 +22,7 @@
   </head>
   <body>
     <main>
-      <section class="form-container">
+      <section class="form-section">
         <h1>Filme</h1>
         <form
           method="post"
@@ -48,9 +48,15 @@
 
           <div class="form-group">
             <label for="elenco">Elenco</label>
-            <input type="text" id="elenco" name="elenco" />
+            <div class="ref-btn">
+              <input type="text" class="iconed" id="elenco" name="elenco" />
+              <button class="btn-ator add-ator" type="button">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>
             <!-- transformar em list input -->
             <small class="help">Deve ter 2 atores no mínimo</small>
+            <ul id="elenco-list"></ul>
           </div>
 
           <button disabled type="submit">
