@@ -1,37 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/index.css">
-    <title>Hello World</title>
-</head>
-<body>
-    
-<h3>Cadastrar Filme</h3>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+      integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/index.js" type="module" defer></script>
+    <title>Cadastrar Filme</title>
+  </head>
+  <body>
+    <main>
+      <section class="form-container">
+        <h1>Filme</h1>
+        <form
+          method="post"
+          action="./controller/FilmeController.php?action=cadastrar"
+        >
+          <div class="form-group">
+            <label for="nome">Título</label>
+            <input type="text" id="nome" name="nome" />
+            <small class="help">Deve possuir 2 caracteres no mínimo</small>
+          </div>
 
-<div>
-  <form method="post" action="./controller/FilmeController.php?action=cadastrar">
-    <label for="nome">Nome</label>
-    <input type="text" id="nome" name="nome">
-    
-    <label for="descricao">Descrição</label>
-    <textarea id="descricao" name="descricao"></textarea>
-   
-    <label for="diretor">Diretor</label>
-    <select id="diretor" name="diretor">
-      <option selected="true" disabled>Selecione...</option>
-      <option value="George Lucas">George Lucas</option>
-      <option value="Steven Spielberg">Steven Spielberg</option>
-      <option value="John Ford">John Ford</option>
-    </select>
-   
-    <label for="elenco">Elenco</label>
-    <textarea id="elenco" name="elenco"></textarea>
+          <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao"></textarea>
+            <small class="help">Deve ter entre 10 e 100 caracteres</small>
+          </div>
 
-    <input type="submit" value="Enviar">
-  </form>
-</div>
-</body>
+          <div class="form-group">
+            <label for="diretor">Diretor</label>
+            <input type="text" id="diretor" name="diretor" />
+            <small class="help">Deve ter o nome e sobrenome do diretor</small>
+          </div>
+
+          <div class="form-group">
+            <label for="elenco">Elenco</label>
+            <input type="text" id="elenco" name="elenco" />
+            <!-- transformar em list input -->
+            <small class="help">Deve ter 2 atores no mínimo</small>
+          </div>
+
+          <button disabled type="submit">
+            <span>Enviar</span>
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
 </html>

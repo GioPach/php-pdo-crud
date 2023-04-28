@@ -15,7 +15,7 @@ class Filme extends Video
     }
 
     /**
-     * @param mixed $diretor 
+     * @param mixed $diretor
      * @return self
      */
     public function setDiretor($diretor): self
@@ -33,7 +33,7 @@ class Filme extends Video
     }
 
     /**
-     * @param mixed $elenco 
+     * @param mixed $elenco
      * @return self
      */
     public function setElenco($elenco): self
@@ -55,7 +55,9 @@ class Filme extends Video
                 ':elenco' => $this->elenco
             ]
         );
-        // $alteredRows = $stmt->rowCount();
+
+        $alteredRows = $stmt->rowCount();
+        return $alteredRows > 0;
         // echo $alteredRows > 0 ? "Vídeo '$this->nome' inserido" : "Falha ao inserir";
     }
 }
