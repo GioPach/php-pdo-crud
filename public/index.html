@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-control" content="no-cache" />
     <link rel="stylesheet" href="./styles/index.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,13 +44,19 @@
           <div class="form-group">
             <label for="diretor">Diretor</label>
             <input type="text" id="diretor" name="diretor" />
-            <small class="help">Deve ter o nome e sobrenome do diretor</small>
+            <small class="help">Deve ter o nome completo do diretor</small>
           </div>
 
           <div class="form-group">
-            <label for="elenco">Elenco</label>
+            <label for="elenco_input_list">Elenco</label>
             <div class="ref-btn">
-              <input type="text" class="iconed" id="elenco" name="elenco" />
+              <input
+                type="text"
+                class="iconed"
+                id="elenco_input_list"
+                name="elenco_input_list"
+              />
+              <input hidden name="elenco" />
               <button class="btn-ator add-ator" type="button">
                 <i class="fa fa-plus" aria-hidden="true"></i>
               </button>

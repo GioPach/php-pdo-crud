@@ -1,5 +1,11 @@
 import AtorListItem from "./components/AtorListItem.js";
 import RemoveButton from "./components/RemoveButton.js";
+import {
+  enableButtonOnAtorList,
+  setElencoState,
+  getCurrentFormState,
+} from "./formValidation.js";
+import { validateNomePessoa } from "./formValidation.js";
 
 const assertTargetIsButton = (target) => {
   if (target.tagName == "svg") {
@@ -16,29 +22,47 @@ function createAtorListItem(inputAtor) {
   document.getElementById("elenco-list").appendChild(li);
 }
 
-const handleAtorUx = (event) => {
-  const inputAtor = assertTargetIsButton(
-    event.target
-  ).parentElement.querySelector("input");
-  createAtorListItem(inputAtor);
-  inputAtor.value = "";
-  inputAtor.focus();
-  return inputAtor;
+export const getElenco = () => JSON.parse(localStorage.getItem("elenco"));
+
+const getInputAtor = (event) =>
+  assertTargetIsButton(event.target).parentElement.querySelector("input");
+
+const updateFormState = (elencoAtual) => {
+  const isValid = elencoAtual.length >= 2;
+
+  const input = document.querySelector('input[name="elenco_input_list"]');
+  const fieldLabel = input.parentElement.parentElement.querySelector("label");
+
+  input.setAttribute("isvalid", isValid);
+  fieldLabel.setAttribute("isvalid", isValid);
+
+  setElencoState(isValid);
+  enableButtonOnAtorList(getCurrentFormState());
 };
 
 export function addAtor(event) {
-  const inputAtor = handleAtorUx(event);
+  const inputAtor = getInputAtor(event);
 
-  const elencoAtual = JSON.parse(localStorage.getItem("elenco"));
-  elencoAtual.push(inputAtor.value);
-  localStorage.setItem("elenco", JSON.stringify(elencoAtual));
+  const ator = inputAtor.value;
+  if (validateNomePessoa(ator)) {
+    createAtorListItem(inputAtor);
+    const elencoAtual = getElenco();
+    elencoAtual.push(ator);
+    localStorage.setItem("elenco", JSON.stringify(elencoAtual));
+    updateFormState(elencoAtual);
+  }
+
+  inputAtor.value = "";
+  inputAtor.focus();
 }
 
 function removeAtor(event) {
   const li = assertTargetIsButton(event.target).parentElement;
-  li.parentElement.removeChild(li);
+  const ator = li.querySelector("span").textContent;
 
-  //   const elencoAtual = JSON.parse(localStorage.getItem("elenco"));
-  //   elencoAtual.push(inputAtor.value);
-  //   localStorage.setItem("elenco", JSON.stringify(elencoAtual));
+  const elencoAtual = getElenco().filter((atorSalvo) => atorSalvo != ator);
+  localStorage.setItem("elenco", JSON.stringify(elencoAtual));
+
+  li.parentElement.removeChild(li);
+  updateFormState(elencoAtual);
 }

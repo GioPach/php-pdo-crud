@@ -1,6 +1,9 @@
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
 //* Global Form State => everything is true = can be submitted
 //*                   => something is false = cannot
+
+import { getElenco } from "./elenco.js";
+
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
 const formState = {
   nome: false,
@@ -9,17 +12,22 @@ const formState = {
   elenco: false,
 };
 
+export const getCurrentFormState = () => formState;
+export const setElencoState = (isValid) => {
+  formState.elenco = isValid;
+};
+
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
 //* Validation Methods
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
 
 const isValid = (field) => field == true;
 const minTwoCharacters = (string) => string.length >= 2;
-const validateNomePessoa = (nome) => {
-  const partesNome = nome.split(" ");
+export const validateNomePessoa = (nome) => {
+  const partesNome = nome.trim().split(" ");
   return partesNome.length >= 2 && partesNome.every(minTwoCharacters);
 };
-const validateText = (text) => text.length >= 10 && text.length <= 100;
+const validateText = (text) => text.trim().length >= 10 && text.length <= 100;
 
 /**
  * Object to map which validation method
@@ -34,7 +42,6 @@ const rules = {
   nome: minTwoCharacters,
   descricao: validateText,
   diretor: validateNomePessoa,
-  elenco: validateNomePessoa,
 };
 
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
@@ -42,27 +49,14 @@ const rules = {
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
 
 /**
- * Used only on form submission
- * @param {FormData} formData object to serialize all form fields
- * @returns result of validation
- */
-function validateAllFields(formData) {
-  const validation = [];
-  for (let [key, value] of formData.entries()) {
-    validation.push(rules[key](value));
-  }
-  return validation;
-}
-
-/**
  * Guarantees that all fields follow the rules defined
  * to submit the form
  * @param {HTMLElement} form
  * @returns result of validation
  */
-export function validateForm(form) {
-  const formData = new FormData(form);
-  return validateAllFields(formData).every(isValid);
+export function validateForm() {
+  document.querySelector('input[name="elenco"]').value = getElenco().join();
+  return Object.values(formState).every(isValid);
 }
 
 //=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==//=-=-=-=-=-=-=-==
@@ -83,6 +77,15 @@ function checkButtonEnabling() {
   }
 }
 
+export function enableButtonOnAtorList(state) {
+  const button = document.querySelector('button[type="submit"]');
+  if (Object.values(state).every(isValid)) {
+    button.disabled = false;
+  } else {
+    button.disabled = true;
+  }
+}
+
 /**
  * Used to perform live validation, triggering
  * the classes for the value being entered by the user
@@ -94,16 +97,12 @@ function checkButtonEnabling() {
  */
 export function validateField() {
   checkButtonEnabling();
-
-  let validation = false;
-  if (rules[this.name](this.value)) validation = true;
-  updateFieldState(this, validation);
-
-  if (this.name !== "elenco") {
+  if (!this.name.includes("elenco")) {
+    let validation = false;
+    if (rules[this.name](this.value)) validation = true;
+    updateFieldState(this, validation);
     formState[this.name] = validation;
-  } else {
   }
-
   checkButtonEnabling();
 }
 
@@ -111,7 +110,6 @@ const getLabel = (field) => {
   if (field.classList.contains("iconed")) {
     return field.parentElement.parentElement.querySelector("label");
   }
-
   return field.parentElement.querySelector("label");
 };
 
@@ -120,13 +118,8 @@ const getLabel = (field) => {
  * isValid boolean attribute.
  * @param {HTMLElement} field input or textarea
  */
-const updateFieldState = (field, isValid) => {
+export const updateFieldState = (field, isValid) => {
   const fieldLabel = getLabel(field);
-  if (isValid) {
-    field.setAttribute("isvalid", true);
-    fieldLabel.setAttribute("isvalid", true);
-  } else {
-    field.setAttribute("isvalid", false);
-    fieldLabel.setAttribute("isvalid", false);
-  }
+  field.setAttribute("isvalid", isValid);
+  fieldLabel.setAttribute("isvalid", isValid);
 };

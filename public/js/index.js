@@ -3,13 +3,15 @@ import { addAtor } from "./elenco.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   configForm();
+
+  localStorage.setItem("elenco", JSON.stringify([]));
 });
 
 function configForm() {
   const form = document.querySelector("form");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (validateForm(form)) {
+    if (validateForm()) {
       form.submit();
     }
   });

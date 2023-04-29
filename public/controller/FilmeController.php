@@ -9,13 +9,13 @@ return  '<p>Nome: ' . $filme->getNome() . '</p>'
 . '<p>Elenco: <' . $filme->getElenco() . '/p>';
 }
 function mensagemErroFilme($filme) {
-    return '<h3 style="color: #FF0000;">Erro'
+    return '<h3 style="color: #FF0000;">Erro '
     . 'ao cadastrar Filme!</h3>'
     . printFilme($filme);
 }
 
 function mensagemSucessoFilme($filme) {
-    return '<h3 style="color: #4CAF50;">Sucesso'
+    return '<h3 style="color: #4CAF50;">Sucesso '
     . 'ao cadastrar Filme!</h3>'
     . printFilme($filme);
 }
