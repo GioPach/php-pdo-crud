@@ -2,27 +2,31 @@
 
 include "../model/Filme.class.php";
 
-function printFilme(Filme $filme) {
-return  '<p>Nome: ' . $filme->getNome() . '</p>'
-. '<p>Descrição: ' . $filme->getDescricao() . '</p>'
-. '<p>Diretor: ' . $filme->getDiretor() . '</p>'
-. '<p>Elenco: <' . $filme->getElenco() . '/p>';
-}
-function mensagemErroFilme($filme) {
-    return '<h3 style="color: #FF0000;">Erro '
-    . 'ao cadastrar Filme!</h3>'
-    . printFilme($filme);
-}
+// function printFilme(Filme $filme)
+// {
+//     return '<p>Nome: ' . $filme->getNome() . '</p>'
+//         . '<p>Descrição: ' . $filme->getDescricao() . '</p>'
+//         . '<p>Diretor: ' . $filme->getDiretor() . '</p>'
+//         . '<p>Elenco: <' . $filme->getElenco() . '/p>';
+// }
+// function mensagemErroFilme($filme)
+// {
+//     return '<h3 style="color: #FF0000;">Erro '
+//         . 'ao cadastrar Filme!</h3>'
+//         . printFilme($filme);
+// }
 
-function mensagemSucessoFilme($filme) {
-    return '<h3 style="color: #4CAF50;">Sucesso '
-    . 'ao cadastrar Filme!</h3>'
-    . printFilme($filme);
-}
+// function mensagemSucessoFilme($filme)
+// {
+//     return '<h3 style="color: #4CAF50;">Sucesso '
+//         . 'ao cadastrar Filme!</h3>'
+//         . printFilme($filme);
+// }
 
-function mensagemErro() {
-    return '<h3 style="color: #FF0000;">Envie todos os dados do filme!<h3>';
-}
+// function mensagemErro()
+// {
+//     return '<h3 style="color: #FF0000;">Envie todos os dados do filme!<h3>';
+// }
 
 function saveFilme()
 {
@@ -32,11 +36,13 @@ function saveFilme()
     $filme->setDiretor($_POST['diretor']);
     $filme->setElenco($_POST['elenco']);
 
-    if($filme->save()) {
-        return mensagemSucessoFilme($filme);
-    } else {
-        return mensagemErroFilme($filme);
+    if ($filme->save()) {
+        return $filme;
+        // return mensagemSucessoFilme($filme);
     }
+
+    return new Filme();
+    // return mensagemErroFilme($filme);
 
 }
 
@@ -60,5 +66,28 @@ function isFilmeSet()
 
 $action = $_GET['action'];
 if ($action == 'cadastrar') {
-    echo isFilmeSet() ? saveFilme() : mensagemErro();
+    isFilmeSet() && saveFilme();
+    // echo isFilmeSet() ? saveFilme() : mensagemErro();
+} else if ($action == 'deletar') {
+
+    //* $_REQUEST
+    //     Note:
+    // The variables in $_REQUEST are provided to the script via the GET, POST, and COOKIE 
+    // input mechanisms and therefore could be modified by the remote user and cannot be trusted. 
+    // The presence and order of variables listed in this array is defined according to the PHP 
+    // request_order, and variables_order configuration directives.
+
+    //?     Abrir no xampp_control Apache > Config > PHP(php.ini)
+    //?     E=Envy, G=Get, P=Post, C=Cookie, S=Session
+    //?     ; request_order                     ; variables_order    
+    //?     ;   Default Value: None             ;   Default Value: "EGPCS"
+    //?     ;   Development Value: "GP"         ;   Development Value: "GPCS"
+    //?     ;   Production Value: "GP"          ;   Production Value: "GPCS" 
+    //* Requisição: http://localhost/php-pdo-crud/public/controller/FilmeController.php?action=deletar&id=1
+
+    Filme::deletar($_REQUEST['id']);
+} else if ($action == 'relatorio') {
+    Filme::echoAll();
+} else if ($action == 'getAll') {
+    Filme::getAll();
 }

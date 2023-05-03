@@ -55,7 +55,7 @@ const rules = {
  * @returns result of validation
  */
 export function validateForm() {
-  document.querySelector('input[name="elenco"]').value = getElenco().join();
+  document.querySelector('input[name="elenco"]').value = getElenco().join(", ");
   return Object.values(formState).every(isValid);
 }
 

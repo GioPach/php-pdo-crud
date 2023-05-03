@@ -1,5 +1,5 @@
 <?php
-include "Video.class.php";
+include 'Video.class.php';
 include_once '../core/conexao.php';
 class Filme extends Video
 {
@@ -42,7 +42,6 @@ class Filme extends Video
         return $this;
     }
 
-
     public function save()
     {
         $pdo = conexao();
@@ -56,10 +55,53 @@ class Filme extends Video
             ]
         );
 
+        // echo $alteredRows > 0 ? 'Vídeo '$this->nome' inserido' : 'Falha ao inserir';
         $alteredRows = $stmt->rowCount();
         return $alteredRows > 0;
-        // echo $alteredRows > 0 ? "Vídeo '$this->nome' inserido" : "Falha ao inserir";
     }
+
+    public static function deletar($id)
+    {
+        $pdo = conexao();
+        $stmt = $pdo->prepare('DELETE FROM filme WHERE id = :id');
+        $stmt->execute(
+            [
+                ':id' => $id
+            ]
+        );
+        $alteredRows = $stmt->rowCount();
+        return $alteredRows > 0;
+    }
+
+    //* Performático
+    //* Mais útil para páginas de relatório rápidas
+    //* não muito útil para CRUDs
+    public static function echoAll()
+    {
+        $pdo = conexao();
+        foreach ($pdo->query('SELECT id, nome, diretor, elenco FROM filme') as $linha) {
+            echo 'ID: ' . $linha['id'] . '<br />';
+            echo 'Nome: ' . $linha['nome'] . '<br />';
+            echo 'Diretor: ' . $linha['diretor'] . '<br />';
+            echo 'Elenco: ' . $linha['elenco'] . '<br /><br />';
+        }
+    }
+
+    public static function getAll()
+    {
+        $pdo = conexao();
+        $lista = [];
+        foreach ($pdo->query('SELECT * FROM filme') as $linha) {
+            $filme = new Filme();
+            $filme->setNome($linha['nome']);
+            $filme->setDescricao($linha['descricao']);
+            $filme->setDiretor($linha['diretor']);
+            $filme->setElenco($linha['elenco']);
+            $lista[] = $filme;
+        }
+        return $lista;
+    }
+
 }
 
 ?>
