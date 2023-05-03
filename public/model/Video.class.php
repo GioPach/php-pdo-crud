@@ -3,8 +3,27 @@ include_once '../core/conexao.php';
 
 class Video
 {
+    protected $id;
     protected $nome;
     protected $descricao;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $nome 
+     * @return self
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     /**
      * @return mixed

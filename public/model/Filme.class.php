@@ -93,6 +93,7 @@ class Filme extends Video
         $lista = [];
         foreach ($pdo->query('SELECT * FROM filme') as $linha) {
             $filme = new Filme();
+            $filme->setId($linha['id']);
             $filme->setNome($linha['nome']);
             $filme->setDescricao($linha['descricao']);
             $filme->setDiretor($linha['diretor']);

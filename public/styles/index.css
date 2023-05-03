@@ -93,7 +93,7 @@ textarea:focus {
   outline: none;
 }
 
-section.form-section {
+section.main-section {
   display: flex;
   align-items: center;
   justify-content: center;
