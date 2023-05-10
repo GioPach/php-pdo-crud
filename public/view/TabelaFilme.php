@@ -40,35 +40,35 @@ $filmes = Filme::getAll();
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Descrição</th>
-                            <th>Diretor</th>
-                            <th>Elenco</th>
-                            <th>Ações</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Nome</th>
+                            <th class="text-center">Descrição</th>
+                            <th class="text-center">Diretor</th>
+                            <th class="text-center">Elenco</th>
+                            <th class="text-center">Ações</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <?php foreach ($filmes as $filme) { ?>
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     <!-- <\?= é uma junção de php echo -->
                                     <?= $filme->getId() ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <?= $filme->getNome() ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <?= $filme->getDescricao() ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <?= $filme->getDiretor() ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <?= $filme->getElenco() ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <button class="btn btn-primary"><i class="fa fa-eye"></i></button>
                                     <button class="btn btn-success"><i class="fa fa-edit"></i></button>
                                     <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
