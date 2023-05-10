@@ -1,3 +1,7 @@
+:root {
+  --red: #eb4444;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,27 +10,32 @@
 }
 
 main {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.container-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+}
+
+.main-bg-image {
   background: url("../assets/netflix-fundo.svg") no-repeat center;
   background-size: cover;
   background-attachment: fixed;
-  padding: 2rem;
 }
 
-
-h1 {
-  color: #d61c1c;
+.main-title {
+  color: var(--red);
   font-weight: 500;
   font-size: 2rem;
   text-align: center;
   letter-spacing: 1px;
 }
 
-button[type=submit] {
+button[type="submit"] {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,11 +50,11 @@ button[type=submit] {
   cursor: pointer;
 }
 
-button[type=submit]:hover {
+button[type="submit"]:hover {
   background-color: #911414;
 }
 
-button[type=submit]:disabled {
+button[type="submit"]:disabled {
   background-color: #af4f4f;
   cursor: not-allowed;
 }
@@ -58,7 +67,7 @@ form {
   gap: 20px;
 }
 
-form>* {
+form > * {
   width: 80%;
 }
 
@@ -73,7 +82,7 @@ small.help {
   color: #858585;
 }
 
-input[type=text],
+input[type="text"],
 textarea {
   width: 100%;
   padding: 12px 20px;
@@ -88,42 +97,43 @@ textarea {
   resize: none;
 }
 
-input[type=text]:focus,
+input[type="text"]:focus,
 textarea:focus {
   outline: none;
 }
 
-section.main-section {
+.flex-section {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 5px;
   margin: 0 20px;
-  background-color: rgba(0, 0, 0, 0.8);
   padding: 20px 30px 35px 30px;
   gap: 20px;
   border-radius: 15px;
-  -webkit-box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.66);
-  box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.66);
 }
 
-textarea[isvalid=false],
-input[isvalid=false] {
-  border: 2px solid #FF0000;
+.bg-dark {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-textarea[isvalid=true],
-input[isvalid=true] {
-  border: 2px solid #4CAF50;
+textarea[isvalid="false"],
+input[isvalid="false"] {
+  border: 2px solid #ff0000;
 }
 
-label[isvalid=false] {
-  color: #FF0000;
+textarea[isvalid="true"],
+input[isvalid="true"] {
+  border: 2px solid #4caf50;
 }
 
-label[isvalid=true] {
-  color: #4CAF50;
+label[isvalid="false"] {
+  color: #ff0000;
+}
+
+label[isvalid="true"] {
+  color: #4caf50;
 }
 
 div.ref-btn {

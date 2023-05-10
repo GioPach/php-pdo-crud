@@ -67,6 +67,7 @@ function isFilmeSet()
 $action = $_GET['action'];
 if ($action == 'cadastrar') {
     isFilmeSet() && saveFilme();
+    header("Location: ../view/TabelaFilme.php");
     // echo isFilmeSet() ? saveFilme() : mensagemErro();
 } else if ($action == 'deletar') {
 
@@ -86,6 +87,8 @@ if ($action == 'cadastrar') {
     //* Requisição: http://localhost/php-pdo-crud/public/controller/FilmeController.php?action=deletar&id=1
 
     Filme::deletar($_REQUEST['id']);
+    header("Location: ../view/TabelaFilme.php");
+
 } else if ($action == 'relatorio') {
     Filme::echoAll();
 } else if ($action == 'getAll') {

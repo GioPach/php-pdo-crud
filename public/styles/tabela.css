@@ -1,22 +1,36 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
+/* table {
+  border-collapse: collapse;
+  width: 100%;
+} */
+.filmes-title {
+  display: inline-block;
+  font-size: 2rem;
+  width: 50%;
+  color: var(--red);
+  text-align: center;
+  border-bottom: 1px solid var(--red);
+  margin-bottom: 45px;
+}
 
-  th {
-    color: #FF0000;
-    background-color: #000;
-  }
-  
-  td, th {
-    text-align: left;
-    padding: 8px;
-  }
+.msg-empty {
+  color: #555;
+}
 
-  tr:nth-child(odd) {
-    background-color: #d4d4d4;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+/* th {
+  color: var(--red);
+  background-color: #222;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #d4d4d4;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+} */

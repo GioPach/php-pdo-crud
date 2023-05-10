@@ -76,6 +76,22 @@ class Video
         // $alteredRows = $stmt->rowCount();
         // echo $alteredRows > 0 ? "Vídeo '$this->nome' inserido" : "Falha ao inserir";
     }
+    public function update()
+    {
+        $pdo = conexao();
+        $stmt = $pdo->prepare('UPDATE video SET nome = :nome, descricao = :descricao WHERE id = :id');
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':descricao', $this->descricao);
+        $stmt->execute();
+        // $stmt->execute(
+        //     [
+        //         ':nome' => $this->nome
+        //     ]
+        // );
+        // $alteredRows = $stmt->rowCount();
+        // echo $alteredRows > 0 ? "Vídeo '$this->nome' inserido" : "Falha ao inserir";
+    }
 
 }
 
