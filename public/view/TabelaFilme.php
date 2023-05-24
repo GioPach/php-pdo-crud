@@ -69,9 +69,10 @@ $filmes = Filme::getAll();
                                     <?= $filme->getElenco() ?>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-primary"><i class="fa fa-eye"></i></button>
-                                    <button class="btn btn-success"><i class="fa fa-edit"></i></button>
-                                    <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                    <a href="#" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                    <a href="../controller/FilmeController.php?action=deletar&id=<?= $filme->getId() ?>"
+                                        class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php } ?> <!-- fechar foreach -->
